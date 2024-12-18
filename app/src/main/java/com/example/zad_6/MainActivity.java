@@ -1,8 +1,5 @@
 package com.example.zad_6;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-
-import android.health.connect.datatypes.units.Length;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -11,49 +8,41 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText Email;
+    private EditText email;
     private EditText password;
-    private EditText confirmpassword;
+    private EditText confirmPassword;
     private Button confirm;
     private TextView alert;
 
     @Override
-    protected void onCreate(Bundle saveInstanceState){
+    protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
 
-        Email = findViewById(R.id.Email);
+        email = findViewById(R.id.Email);
         password = findViewById(R.id.password);
-        confirmpassword = findViewById(R.id.confirmpassword);
+        confirmPassword = findViewById(R.id.confirmpassword);
         confirm = findViewById(R.id.confirm);
         alert = findViewById(R.id.alert);
 
-        confirm.setOnClickListener(new View.OnLickListener(){
+        confirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View V){
-                String e = Email.getText().toString().trim();
+            public void onClick(View V) {
+                String e = email.getText().toString().trim();
                 String p = password.getText().toString().trim();
-                String cp = confirmpassword.getText().toString().trim();
-                if (!isValiEmail(Email)) {
+                String cp = confirmPassword.getText().toString().trim();
+                //"^.{1,}@.{1,}\\..{2,}$" dla całego adresu email
+                if (!e.matches("^.{1,}@.{1,}$")) {
                     alert.setText("Niepoprawny Email");
-                } else if (!cp.equals(p)) ;
-                alert.setText("Hasla się różnią");
-            }
-        else if (!Patterns.EMAIL_ADDRESS.matcher(e).matches()) {
-                Toast.makeText(MainActivity.this, "Niepoprawny email", Toast.LENGTH_SHORT).show();
+                }
+                else if (!cp.equals(p))
+                    alert.setText("Hasla się różnią");
+                else
+                    alert.setText("Witaj " + e);
             }
         });
     }
-
-    private boolean isValiEmail(EditText email) {
-        return false;
-    }
-
 }
