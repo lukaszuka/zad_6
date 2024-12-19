@@ -34,14 +34,15 @@ public class MainActivity extends AppCompatActivity {
                 String e = email.getText().toString().trim();
                 String p = password.getText().toString().trim();
                 String cp = confirmPassword.getText().toString().trim();
-                //"^.{1,}@.{1,}\\..{2,}$" dla całego adresu email
-                if (!e.matches("^.{1,}@.{1,}$")) {
-                    alert.setText("Niepoprawny Email");
-                }
-                else if (!cp.equals(p))
-                    alert.setText("Hasla się różnią");
-                else
+
+                if(!e.contains("@")){
+                    alert.setText("Nieprawidłowy adres email@2");
+                } else if (!cp.equals(p)){
+                    alert.setText(("Hasla sie różnią"));
+                } else {
                     alert.setText("Witaj " + e);
+                }
+
             }
         });
     }
